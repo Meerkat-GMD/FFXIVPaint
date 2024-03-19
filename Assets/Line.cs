@@ -30,10 +30,4 @@ public class Line : MonoBehaviour
         LineRenderer.positionCount = points.Count;
         LineRenderer.SetPosition(points.Count - 1, point);
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
