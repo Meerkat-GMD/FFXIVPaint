@@ -17,7 +17,9 @@ public class LineGenerator : MonoBehaviour
     public Material RedLineMaterial;
     public Material BlueLineMaterial;
 
-    private Line activeLine;
+    private Line _activeLine;
+    private readonly Stack<Line> _undoLineStack = new();
+    private readonly Stack<Line> _redoLineStack = new();
     private LineColor _lineColor;
     
     private void Start()
@@ -42,25 +44,53 @@ public class LineGenerator : MonoBehaviour
                 LineColor.Blue => BlueLineMaterial,
                 _ => throw new ArgumentOutOfRangeException(),
             };
-            activeLine = newLine.GetComponent<Line>();
+            _activeLine = newLine.GetComponent<Line>();
         }
 
         if (Input.GetMouseButtonUp(0))
         {
-            activeLine = null;
+            _undoLineStack.Push(_activeLine);
+            foreach (var redoLine in _redoLineStack)
+            {
+                Destroy(redoLine);
+            }
+            _redoLineStack.Clear();
+            _activeLine = null;
         }
 
-        if (activeLine != null)
+        if (_activeLine != null)
         {
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            activeLine.UpdateLine(mousePos);
+            _activeLine.UpdateLine(mousePos);
         }
     }
-
-    
     
     public void SetColor(LineColor lineColor)
     {
         _lineColor = lineColor;
+    }
+
+    public void Undo()
+    {
+        if (!_undoLineStack.TryPop(out var undoLine))
+        {
+            return;
+        }
+        
+        undoLine.gameObject.SetActive(false);
+        
+        _redoLineStack.Push(undoLine);
+    }
+
+    public void Redo()
+    {
+        if (!_redoLineStack.TryPop(out var redoLine))
+        {
+            return;
+        }
+        
+        redoLine.gameObject.SetActive(true);
+        
+        _undoLineStack.Push(redoLine);
     }
 }

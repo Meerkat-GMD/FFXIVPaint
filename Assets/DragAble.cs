@@ -11,6 +11,13 @@ public class DragAble : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     
     public void OnBeginDrag(PointerEventData eventData)
     {
+        if (Painter.IsDrawingState)
+        {
+            return;
+        }
+        
+        Painter.DragReDoStack.Clear();
+        Painter.DragUnDoStack.Push((gameObject, transform.localPosition));
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -27,6 +34,7 @@ public class DragAble : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        
     }
 
     public void OnDrop(PointerEventData eventData)
