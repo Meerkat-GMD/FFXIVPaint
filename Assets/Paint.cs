@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum InputState
 {
@@ -13,13 +14,22 @@ public static class Painter
 {
     public static bool IsDrawingState { get; set; } = true;
 
-    public static Stack<(GameObject, Vector3)> DragUnDoStack = new();
-    public static Stack<(GameObject, Vector3)> DragReDoStack = new();
+    public static Stack<Action> ObjectActionUnDoStack = new();
+    public static Stack<Action> ObjectActionReDoStack = new();
 }
 
 public class Paint : MonoBehaviour
 {
     [SerializeField] private LineGenerator _lineGenerator;
+    [SerializeField] private Transform _paintObjectParent;
+    [SerializeField] private GameObject _sizePanel;
+    [SerializeField] private GameObject _dragAbleObject;
+    
+    private void Start()
+    {
+        _lineGenerator.Init(_paintObjectParent);
+        _sizePanel.SetActive(false);
+    }
 
     private void Update()
     {
@@ -36,16 +46,13 @@ public class Paint : MonoBehaviour
             }
             else
             {
-                if (!Painter.DragUnDoStack.TryPop(out var dragData))
+                if (!Painter.ObjectActionUnDoStack.TryPop(out var objectActionData))
                 {
                     return;
                 }
 
-                var obj = dragData.Item1;
-                var localPosition = dragData.Item2;
-
-                Painter.DragReDoStack.Push((obj, obj.transform.localPosition));
-                obj.transform.localPosition = localPosition;
+                Painter.ObjectActionReDoStack.Push(objectActionData);
+                objectActionData.Undo();
             }
         }
         
@@ -57,16 +64,13 @@ public class Paint : MonoBehaviour
             }
             else
             {
-                if (!Painter.DragReDoStack.TryPop(out var dragData))
+                if (!Painter.ObjectActionReDoStack.TryPop(out var objectActionData))
                 {
                     return;
                 }
                 
-                var obj = dragData.Item1;
-                var localPosition = dragData.Item2;
-                
-                Painter.DragUnDoStack.Push((obj, obj.transform.localPosition));
-                obj.transform.localPosition = localPosition;
+                Painter.ObjectActionUnDoStack.Push(objectActionData);
+                objectActionData.Redo();
             }
         }
     }
@@ -80,17 +84,31 @@ public class Paint : MonoBehaviour
     {
         Painter.IsDrawingState = true;
         _lineGenerator.SetColor(LineColor.Black);
+        _sizePanel.SetActive(false);
     }
 
     public void OnClickRedButton()
     {
         Painter.IsDrawingState = true;
         _lineGenerator.SetColor(LineColor.Red);
+        _sizePanel.SetActive(false);
     }
 
     public void OnClickBlueButton()
     {
         Painter.IsDrawingState = true;
         _lineGenerator.SetColor(LineColor.Blue);
+        _sizePanel.SetActive(false);
+    }
+
+    public void OnClickCircleButton()
+    {
+        Painter.IsDrawingState = false;
+        var circle = Instantiate(_dragAbleObject, _paintObjectParent).GetComponent<Image>();
+        circle.sprite = Resources.Load<Sprite>("Aoe/CircleAoe");
+        circle.gameObject.SetActive(true);
+        
+        Painter.ObjectActionReDoStack.Clear();
+        Painter.ObjectActionUnDoStack.Push(new CreateAction(circle.gameObject));
     }
 }

@@ -21,12 +21,17 @@ public class LineGenerator : MonoBehaviour
     private readonly Stack<Line> _undoLineStack = new();
     private readonly Stack<Line> _redoLineStack = new();
     private LineColor _lineColor;
+    private Transform _paintObjectParent;
+    public void Init(Transform paintObjectParent)
+    {
+        _paintObjectParent = paintObjectParent;
+    }
     
     private void Start()
     {
         _lineColor = LineColor.Black;
     }
-
+    
     void Update()
     {
         if (!Painter.IsDrawingState)
@@ -36,7 +41,7 @@ public class LineGenerator : MonoBehaviour
         
         if (Input.GetMouseButtonDown(0))
         {
-            var newLine = Instantiate(LinePrefab);
+            var newLine = Instantiate(LinePrefab, _paintObjectParent);
             newLine.GetComponent<LineRenderer>().material = _lineColor switch
             {
                 LineColor.Black => BlackLineMaterial,

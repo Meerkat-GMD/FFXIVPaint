@@ -16,8 +16,8 @@ public class DragAble : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             return;
         }
         
-        Painter.DragReDoStack.Clear();
-        Painter.DragUnDoStack.Push((gameObject, transform.localPosition));
+        Painter.ObjectActionReDoStack.Clear();
+        Painter.ObjectActionUnDoStack.Push(new MoveAction(gameObject, transform.localPosition));
     }
 
     public void OnDrag(PointerEventData eventData)
