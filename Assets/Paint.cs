@@ -4,16 +4,16 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum InputState
+public enum PainterState
 {
-    Move,
     Draw,
+    Move,
+    Rotation,
 }
 
 public static class Painter
 {
-    public static bool IsDrawingState { get; set; } = true;
-
+    public static PainterState PainterState = PainterState.Draw; 
     public static Stack<Action> ObjectActionUnDoStack = new();
     public static Stack<Action> ObjectActionReDoStack = new();
 }
@@ -61,35 +61,40 @@ public class Paint : MonoBehaviour
         }
     }
 
-    public void OnClickPenButton()
+    public void OnClickMoveButton()
     {
-        Painter.IsDrawingState = false;
+        Painter.PainterState = PainterState.Move;
+    }
+
+    public void OnClickRotationButton()
+    {
+        Painter.PainterState = PainterState.Rotation;
     }
     
     public void OnClickBlackButton()
     {
-        Painter.IsDrawingState = true;
+        Painter.PainterState = PainterState.Draw;
         _lineGenerator.SetColor(LineColor.Black);
         _sizePanel.SetActive(false);
     }
 
     public void OnClickRedButton()
     {
-        Painter.IsDrawingState = true;
+        Painter.PainterState = PainterState.Draw;
         _lineGenerator.SetColor(LineColor.Red);
         _sizePanel.SetActive(false);
     }
 
     public void OnClickBlueButton()
     {
-        Painter.IsDrawingState = true;
+        Painter.PainterState = PainterState.Draw;
         _lineGenerator.SetColor(LineColor.Blue);
         _sizePanel.SetActive(false);
     }
 
     public void OnClickCircleButton()
     {
-        Painter.IsDrawingState = false;
+        Painter.PainterState = PainterState.Move;
         var circle = Instantiate(_dragAbleObject, _paintObjectParent).GetComponent<Image>();
         circle.sprite = Resources.Load<Sprite>("Aoe/CircleAoe");
         circle.gameObject.SetActive(true);

@@ -32,7 +32,7 @@ public class LineGenerator : MonoBehaviour
     
     void Update()
     {
-        if (!Painter.IsDrawingState)
+        if (Painter.PainterState != PainterState.Draw)
         {
             return;
         }

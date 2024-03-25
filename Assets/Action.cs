@@ -66,3 +66,27 @@ public class DrawAction : Action
     }
 }
 
+public class RotateAction : Action
+{
+    public float RotateAngle;
+    public RotateAction(GameObject target, float rotateAngle) : base(target)
+    {
+        RotateAngle = rotateAngle;
+    }
+    
+    public override void Redo()
+    {
+        var eulerAngles = new Vector3(0, 0,RotateAngle);
+        float temp = Target.transform.eulerAngles.z;
+        RotateAngle = temp;
+        Target.transform.eulerAngles = eulerAngles;
+    }
+
+    public override void Undo()
+    {
+        var eulerAngles = new Vector3(0, 0,RotateAngle);
+        float temp = Target.transform.eulerAngles.z;
+        RotateAngle = temp;
+        Target.transform.eulerAngles = eulerAngles;
+    }
+}

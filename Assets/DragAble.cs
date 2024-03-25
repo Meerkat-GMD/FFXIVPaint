@@ -11,7 +11,7 @@ public class DragAble : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (Painter.IsDrawingState)
+        if (Painter.PainterState != PainterState.Move)
         {
             return;
         }
@@ -22,7 +22,7 @@ public class DragAble : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     public void OnDrag(PointerEventData eventData)
     {
-        if (Painter.IsDrawingState)
+        if (Painter.PainterState != PainterState.Move)
         {
             return;
         }

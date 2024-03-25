@@ -25,7 +25,7 @@ public class SizeAdjustAble : MonoBehaviour, IPointerDownHandler
             return;
         }
         
-        if (Painter.IsDrawingState)
+        if (Painter.PainterState != PainterState.Move)
         {
             return;
         }
