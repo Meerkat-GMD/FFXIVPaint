@@ -102,4 +102,15 @@ public class Paint : MonoBehaviour
         Painter.ObjectActionReDoStack.Clear();
         Painter.ObjectActionUnDoStack.Push(new CreateAction(circle.gameObject));
     }
+
+    public void OnClickLineButton()
+    {
+        Painter.PainterState = PainterState.Move;
+        var line = Instantiate(_dragAbleObject, _paintObjectParent).GetComponent<Image>();
+        line.sprite = Resources.Load<Sprite>("Aoe/LineAoe");
+        line.gameObject.SetActive(true);
+        
+        Painter.ObjectActionReDoStack.Clear();
+        Painter.ObjectActionUnDoStack.Push(new CreateAction(line.gameObject));
+    }
 }
