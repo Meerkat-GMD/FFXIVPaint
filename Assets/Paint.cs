@@ -38,40 +38,26 @@ public class Paint : MonoBehaviour
             
         }
         
-        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.Z))
+        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.T))
         {
-            if (Painter.IsDrawingState)
+            if (!Painter.ObjectActionUnDoStack.TryPop(out var objectActionData))
             {
-                _lineGenerator.Undo();
+                return;
             }
-            else
-            {
-                if (!Painter.ObjectActionUnDoStack.TryPop(out var objectActionData))
-                {
-                    return;
-                }
 
-                Painter.ObjectActionReDoStack.Push(objectActionData);
-                objectActionData.Undo();
-            }
+            Painter.ObjectActionReDoStack.Push(objectActionData);
+            objectActionData.Undo();
         }
         
-        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.Y))
+        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.G))
         {
-            if (Painter.IsDrawingState)
+            if (!Painter.ObjectActionReDoStack.TryPop(out var objectActionData))
             {
-                _lineGenerator.Redo();
+                return;
             }
-            else
-            {
-                if (!Painter.ObjectActionReDoStack.TryPop(out var objectActionData))
-                {
-                    return;
-                }
                 
-                Painter.ObjectActionUnDoStack.Push(objectActionData);
-                objectActionData.Redo();
-            }
+            Painter.ObjectActionUnDoStack.Push(objectActionData);
+            objectActionData.Redo();
         }
     }
 

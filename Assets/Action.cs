@@ -4,6 +4,10 @@ public abstract class Action
 {
     public GameObject Target { get; set; }
 
+    public Action(GameObject target)
+    {
+        Target = target;
+    }
     public abstract void Redo(); //ctrl + y
 
     public abstract void Undo(); //ctrl + z
@@ -12,9 +16,8 @@ public abstract class Action
 public class MoveAction : Action
 {
     public Vector3 BeforePosition;
-    public MoveAction(GameObject target, Vector3 beforePosition)
+    public MoveAction(GameObject target, Vector3 beforePosition) : base(target)
     {
-        Target = target;
         BeforePosition = beforePosition;
     }
     
@@ -31,9 +34,8 @@ public class MoveAction : Action
 
 public class CreateAction : Action
 {
-    public CreateAction(GameObject gameObject)
+    public CreateAction(GameObject target) : base(target)
     {
-        Target = gameObject;
     }
     
     public override void Redo()
@@ -46,3 +48,21 @@ public class CreateAction : Action
         Target.SetActive(false);
     }
 }
+
+public class DrawAction : Action
+{
+    public DrawAction(GameObject target) : base(target)
+    {
+    }
+    
+    public override void Redo()
+    {
+        Target.SetActive(true);
+    }
+
+    public override void Undo()
+    {
+        Target.SetActive(false);
+    }
+}
+
