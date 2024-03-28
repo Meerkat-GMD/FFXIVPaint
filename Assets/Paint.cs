@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
+// ReSharper disable All
 
 public enum PainterState
 {
@@ -14,8 +15,36 @@ public enum PainterState
 public static class Painter
 {
     public static PainterState PainterState = PainterState.Draw; 
-    public static Stack<Action> ObjectActionUnDoStack = new();
-    public static Stack<Action> ObjectActionReDoStack = new();
+    private static readonly Stack<Action> _objectActionUnDoStack = new();
+    private static readonly Stack<Action> _objectActionReDoStack = new();
+
+    public static void DoAction(Action action)
+    {
+        _objectActionReDoStack.Clear();
+        _objectActionUnDoStack.Push(action);
+    }
+
+    public static void Redo()
+    {
+        if (!_objectActionReDoStack.TryPop(out var objectActionData))
+        {
+            return;
+        }
+                
+        _objectActionUnDoStack.Push(objectActionData);
+        objectActionData.Redo();
+    }
+
+    public static void Undo()
+    {
+        if (!_objectActionUnDoStack.TryPop(out var objectActionData))
+        {
+            return;
+        }
+
+        _objectActionReDoStack.Push(objectActionData);
+        objectActionData.Undo();
+    }
 }
 
 public class Paint : MonoBehaviour
@@ -40,24 +69,12 @@ public class Paint : MonoBehaviour
         
         if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.T))
         {
-            if (!Painter.ObjectActionUnDoStack.TryPop(out var objectActionData))
-            {
-                return;
-            }
-
-            Painter.ObjectActionReDoStack.Push(objectActionData);
-            objectActionData.Undo();
+            Painter.Undo();
         }
         
         if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.G))
         {
-            if (!Painter.ObjectActionReDoStack.TryPop(out var objectActionData))
-            {
-                return;
-            }
-                
-            Painter.ObjectActionUnDoStack.Push(objectActionData);
-            objectActionData.Redo();
+            Painter.Redo();
         }
     }
 
@@ -99,8 +116,7 @@ public class Paint : MonoBehaviour
         circle.sprite = Resources.Load<Sprite>("Aoe/CircleAoe");
         circle.gameObject.SetActive(true);
         
-        Painter.ObjectActionReDoStack.Clear();
-        Painter.ObjectActionUnDoStack.Push(new CreateAction(circle.gameObject));
+        Painter.DoAction(new CreateAction(circle.gameObject));
     }
 
     public void OnClickLineButton()
@@ -110,7 +126,6 @@ public class Paint : MonoBehaviour
         line.sprite = Resources.Load<Sprite>("Aoe/LineAoe");
         line.gameObject.SetActive(true);
         
-        Painter.ObjectActionReDoStack.Clear();
-        Painter.ObjectActionUnDoStack.Push(new CreateAction(line.gameObject));
+        Painter.DoAction(new CreateAction(line.gameObject));
     }
 }

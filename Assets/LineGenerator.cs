@@ -52,8 +52,7 @@ public class LineGenerator : MonoBehaviour
 
         if (Input.GetMouseButtonUp(0))
         {
-            Painter.ObjectActionUnDoStack.Push(new DrawAction(_activeLine.gameObject));
-            Painter.ObjectActionReDoStack.Clear();
+            Painter.DoAction(new DrawAction(_activeLine.gameObject));
             _activeLine = null;
         }
 
