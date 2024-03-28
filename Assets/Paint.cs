@@ -68,11 +68,6 @@ public class Paint : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.S))
-        {
-            
-        }
-        
         if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.T))
         {
             Painter.Undo();

@@ -27,8 +27,9 @@ public class DragAble : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         }
 
         var data = _mainCaemra.ScreenToWorldPoint(eventData.position);
-        data = new Vector2(data.x, data.y);
+        data = new Vector3(data.x, data.y, 0);
         transform.position = data;
+        transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, 0);
     }
 
     public void OnEndDrag(PointerEventData eventData)
