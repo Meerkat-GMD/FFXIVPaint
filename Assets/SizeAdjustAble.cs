@@ -19,16 +19,19 @@ public class SizeAdjustAble : MonoBehaviour, IPointerDownHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        if (!_isSizeAdjustAble)
-        {
-            _sizePanel.SetActive(false);
-            return;
-        }
-        
         if (Painter.PainterState != PainterState.Move)
         {
             return;
         }
+        
+        if (!_isSizeAdjustAble)
+        {
+            Painter.SelectGameObject = null;
+            _sizePanel.SetActive(false);
+            return;
+        }
+
+        Painter.SelectGameObject = gameObject;
         
         _sizePanel.SetActive(true);
         _widthInputField.onValueChanged.RemoveAllListeners();

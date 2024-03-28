@@ -17,6 +17,7 @@ public static class Painter
     public static PainterState PainterState = PainterState.Draw; 
     private static readonly Stack<Action> _objectActionUnDoStack = new();
     private static readonly Stack<Action> _objectActionReDoStack = new();
+    public static GameObject SelectGameObject = null;
 
     public static void DoAction(Action action)
     {
@@ -44,6 +45,11 @@ public static class Painter
 
         _objectActionReDoStack.Push(objectActionData);
         objectActionData.Undo();
+    }
+
+    public static void SelectObject(GameObject gameObject)
+    {
+        SelectGameObject = gameObject;
     }
 }
 
@@ -75,6 +81,16 @@ public class Paint : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.G))
         {
             Painter.Redo();
+        }
+        
+        if (Input.GetKey(KeyCode.Delete))
+        {
+            if (Painter.SelectGameObject != null)
+            {
+                Painter.SelectGameObject.SetActive(false);
+                Painter.DoAction(new DeleteAction(Painter.SelectGameObject));
+                Painter.SelectGameObject = null;
+            }
         }
     }
 

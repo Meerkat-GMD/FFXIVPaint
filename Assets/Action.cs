@@ -90,3 +90,20 @@ public class RotateAction : Action
         Target.transform.eulerAngles = eulerAngles;
     }
 }
+
+public class DeleteAction : Action
+{
+    public DeleteAction(GameObject target) : base(target)
+    {
+    }
+
+    public override void Redo()
+    {
+        Target.SetActive(false);
+    }
+
+    public override void Undo()
+    {
+        Target.SetActive(true);
+    }
+}
