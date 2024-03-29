@@ -2141,6 +2141,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3982544473129102538, guid: 00dbf202f3df858418a0efb6d479d621, type: 3}
+      propertyPath: _isRotationAble
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7213517661806232876, guid: 00dbf202f3df858418a0efb6d479d621, type: 3}
       propertyPath: m_Name
       value: DragAbleObject
