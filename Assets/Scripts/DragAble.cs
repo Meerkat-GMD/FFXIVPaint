@@ -6,8 +6,19 @@ using UnityEngine.UIElements;
 
 public class DragAble : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
 {
+    [SerializeField] private GameObject parentObject;
     [SerializeField]
     private Camera _mainCaemra;
+    private Canvas canvas;
+    private void Awake()
+    {
+        canvas = GetComponentInParent<Canvas>();
+
+        if (canvas == null)
+        {
+            Debug.LogError("Canvas not found in parent hierarchy.");
+        }
+    }
     
     public void OnBeginDrag(PointerEventData eventData)
     {
@@ -16,7 +27,7 @@ public class DragAble : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             return;
         }
         
-        Painter.DoAction(new MoveAction(gameObject, transform.localPosition));
+        Painter.DoAction(new MoveAction(parentObject, transform.localPosition));
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -25,16 +36,13 @@ public class DragAble : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         {
             return;
         }
-
-        var data = _mainCaemra.ScreenToWorldPoint(eventData.position);
-        data = new Vector3(data.x, data.y, 0);
-        transform.position = data;
-        transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, 0);
+        
+        parentObject.GetComponent<RectTransform>().anchoredPosition += eventData.delta / canvas.scaleFactor;
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        
+         
     }
 
     public void OnDrop(PointerEventData eventData)

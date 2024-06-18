@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
+using DefaultNamespace;
+using TMPro;
 using UnityEditor;
+using UnityEditor.Tilemaps;
 using UnityEngine;
 using UnityEngine.UI;
 // ReSharper disable All
@@ -53,12 +56,18 @@ public static class Painter
     }
 }
 
-public class Paint : MonoBehaviour
+public class Paint : UnitySingleton<Paint>
 {
     [SerializeField] private LineGenerator _lineGenerator;
     [SerializeField] private Transform _paintObjectParent;
     [SerializeField] private GameObject _sizePanel;
     [SerializeField] private GameObject _dragAbleObject;
+    [SerializeField] private TMP_InputField _widthInputField;
+    [SerializeField] private TMP_InputField _heightInputField;
+    
+    public GameObject SizePanel => _sizePanel;
+    public TMP_InputField WidthInputField => _widthInputField;
+    public TMP_InputField HeightInputField => _heightInputField;
     
     private void Start()
     {
@@ -68,12 +77,12 @@ public class Paint : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.T))
+        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.Z))
         {
             Painter.Undo();
         }
         
-        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.G))
+        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.Y))
         {
             Painter.Redo();
         }
@@ -123,8 +132,8 @@ public class Paint : MonoBehaviour
     public void OnClickCircleButton()
     {
         Painter.PainterState = PainterState.Move;
-        var circle = Instantiate(_dragAbleObject, _paintObjectParent).GetComponent<Image>();
-        circle.sprite = Resources.Load<Sprite>("Aoe/CircleAoe");
+        var circle = Instantiate(_dragAbleObject, _paintObjectParent).GetComponent<DragAbleObject>();
+        circle.SetSprite(Resources.Load<Sprite>("Aoe/CircleAoe"));
         circle.gameObject.SetActive(true);
         
         Painter.DoAction(new CreateAction(circle.gameObject));
@@ -133,8 +142,8 @@ public class Paint : MonoBehaviour
     public void OnClickLineButton()
     {
         Painter.PainterState = PainterState.Move;
-        var line = Instantiate(_dragAbleObject, _paintObjectParent).GetComponent<Image>();
-        line.sprite = Resources.Load<Sprite>("Aoe/LineAoe");
+        var line = Instantiate(_dragAbleObject, _paintObjectParent).GetComponent<DragAbleObject>();
+        line.SetSprite(Resources.Load<Sprite>("Aoe/LineAoe")); 
         line.gameObject.SetActive(true);
         
         Painter.DoAction(new CreateAction(line.gameObject));

@@ -38,7 +38,6 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -413,6 +412,10 @@ PrefabInstance:
       propertyPath: _heightInputField
       value: 
       objectReference: {fileID: 898372972}
+    - target: {fileID: 257623481534976621, guid: 00dbf202f3df858418a0efb6d479d621, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: cbdd1c7dfd4490b4a96989cd8ad805da, type: 3}
     - target: {fileID: 3852880615168778071, guid: 00dbf202f3df858418a0efb6d479d621, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -535,6 +538,10 @@ PrefabInstance:
       propertyPath: _heightInputField
       value: 
       objectReference: {fileID: 898372972}
+    - target: {fileID: 257623481534976621, guid: 00dbf202f3df858418a0efb6d479d621, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ba9719c053d116f4ca4ee6b728123933, type: 3}
     - target: {fileID: 3852880615168778071, guid: 00dbf202f3df858418a0efb6d479d621, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1121,6 +1128,10 @@ PrefabInstance:
       propertyPath: _heightInputField
       value: 
       objectReference: {fileID: 898372972}
+    - target: {fileID: 257623481534976621, guid: 00dbf202f3df858418a0efb6d479d621, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d50b871bc3e3164438fa4f4bcd698c63, type: 3}
     - target: {fileID: 3852880615168778071, guid: 00dbf202f3df858418a0efb6d479d621, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1376,6 +1387,10 @@ PrefabInstance:
       propertyPath: _heightInputField
       value: 
       objectReference: {fileID: 898372972}
+    - target: {fileID: 257623481534976621, guid: 00dbf202f3df858418a0efb6d479d621, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 2288f89ef81e4674d9c80bc437951745, type: 3}
     - target: {fileID: 3852880615168778071, guid: 00dbf202f3df858418a0efb6d479d621, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1684,6 +1699,10 @@ PrefabInstance:
       propertyPath: _heightInputField
       value: 
       objectReference: {fileID: 898372972}
+    - target: {fileID: 257623481534976621, guid: 00dbf202f3df858418a0efb6d479d621, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: c6ae32a6f89f4bd49926b9222e6748be, type: 3}
     - target: {fileID: 3852880615168778071, guid: 00dbf202f3df858418a0efb6d479d621, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2061,6 +2080,18 @@ PrefabInstance:
       propertyPath: _isRotationAble
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2746318649965569491, guid: 00dbf202f3df858418a0efb6d479d621, type: 3}
+      propertyPath: _isRotationAble
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2746318649965569491, guid: 00dbf202f3df858418a0efb6d479d621, type: 3}
+      propertyPath: _isSizeAdjustAble
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3652028994788727601, guid: 00dbf202f3df858418a0efb6d479d621, type: 3}
+      propertyPath: _sizePanel
+      value: 
+      objectReference: {fileID: 1273698627}
     - target: {fileID: 3852880615168778071, guid: 00dbf202f3df858418a0efb6d479d621, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2206,6 +2237,8 @@ MonoBehaviour:
   _paintObjectParent: {fileID: 1168144805}
   _sizePanel: {fileID: 1273698627}
   _dragAbleObject: {fileID: 542973260}
+  _widthInputField: {fileID: 282329366}
+  _heightInputField: {fileID: 898372972}
 --- !u!4 &552698801
 Transform:
   m_ObjectHideFlags: 0
@@ -2255,6 +2288,10 @@ PrefabInstance:
       propertyPath: _heightInputField
       value: 
       objectReference: {fileID: 898372972}
+    - target: {fileID: 257623481534976621, guid: 00dbf202f3df858418a0efb6d479d621, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ede3842c821bb6844b774fc336949eb0, type: 3}
     - target: {fileID: 3852880615168778071, guid: 00dbf202f3df858418a0efb6d479d621, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2377,6 +2414,10 @@ PrefabInstance:
       propertyPath: _heightInputField
       value: 
       objectReference: {fileID: 898372972}
+    - target: {fileID: 257623481534976621, guid: 00dbf202f3df858418a0efb6d479d621, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 301e443bcd718b0409deb8b05b65b069, type: 3}
     - target: {fileID: 3852880615168778071, guid: 00dbf202f3df858418a0efb6d479d621, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2499,6 +2540,10 @@ PrefabInstance:
       propertyPath: _heightInputField
       value: 
       objectReference: {fileID: 898372972}
+    - target: {fileID: 257623481534976621, guid: 00dbf202f3df858418a0efb6d479d621, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 8e57025931fc01f48bdcd32324a62fc7, type: 3}
     - target: {fileID: 3852880615168778071, guid: 00dbf202f3df858418a0efb6d479d621, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2822,6 +2867,10 @@ PrefabInstance:
       propertyPath: _heightInputField
       value: 
       objectReference: {fileID: 898372972}
+    - target: {fileID: 257623481534976621, guid: 00dbf202f3df858418a0efb6d479d621, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6449889fd456b66449a58fab56aac1ee, type: 3}
     - target: {fileID: 3852880615168778071, guid: 00dbf202f3df858418a0efb6d479d621, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -3253,6 +3302,10 @@ PrefabInstance:
       propertyPath: _heightInputField
       value: 
       objectReference: {fileID: 898372972}
+    - target: {fileID: 257623481534976621, guid: 00dbf202f3df858418a0efb6d479d621, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: af024edfc80e8ad479090618f05b202d, type: 3}
     - target: {fileID: 3852880615168778071, guid: 00dbf202f3df858418a0efb6d479d621, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -3401,10 +3454,10 @@ RectTransform:
   - {fileID: 760925211}
   m_Father: {fileID: 1354063376}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &970179723
 GameObject:
@@ -3806,6 +3859,10 @@ PrefabInstance:
       propertyPath: _heightInputField
       value: 
       objectReference: {fileID: 898372972}
+    - target: {fileID: 257623481534976621, guid: 00dbf202f3df858418a0efb6d479d621, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ce2061463f322434faba68fb084b9173, type: 3}
     - target: {fileID: 3852880615168778071, guid: 00dbf202f3df858418a0efb6d479d621, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -4252,6 +4309,10 @@ PrefabInstance:
       propertyPath: _heightInputField
       value: 
       objectReference: {fileID: 898372972}
+    - target: {fileID: 257623481534976621, guid: 00dbf202f3df858418a0efb6d479d621, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9cddab9e0cfc30744b579111c44a5240, type: 3}
     - target: {fileID: 3852880615168778071, guid: 00dbf202f3df858418a0efb6d479d621, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -4422,6 +4483,10 @@ PrefabInstance:
       propertyPath: _heightInputField
       value: 
       objectReference: {fileID: 898372972}
+    - target: {fileID: 257623481534976621, guid: 00dbf202f3df858418a0efb6d479d621, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: c6e3833623e6db04e9ca3350e907e39e, type: 3}
     - target: {fileID: 3852880615168778071, guid: 00dbf202f3df858418a0efb6d479d621, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -4811,6 +4876,10 @@ PrefabInstance:
       propertyPath: _heightInputField
       value: 
       objectReference: {fileID: 898372972}
+    - target: {fileID: 257623481534976621, guid: 00dbf202f3df858418a0efb6d479d621, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6fccb33e69b9724459c2be2dccd23339, type: 3}
     - target: {fileID: 3852880615168778071, guid: 00dbf202f3df858418a0efb6d479d621, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -5386,6 +5455,10 @@ PrefabInstance:
       propertyPath: _heightInputField
       value: 
       objectReference: {fileID: 898372972}
+    - target: {fileID: 257623481534976621, guid: 00dbf202f3df858418a0efb6d479d621, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 8b9d3f70297ff69458eec9a20fbaec4a, type: 3}
     - target: {fileID: 3852880615168778071, guid: 00dbf202f3df858418a0efb6d479d621, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

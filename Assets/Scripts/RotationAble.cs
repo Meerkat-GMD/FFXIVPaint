@@ -5,16 +5,13 @@ namespace DefaultNamespace
 {
     public class RotationAble : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
     {
-        [SerializeField] private bool _isRotationAble;
-        
-        private RectTransform _rectTransform;
-    
-        private void Start()
+        [SerializeField] private RectTransform _rectTransform;
+        private bool _isRotationAble;
+        public void Init(bool isRotationAble)
         {
-            _rectTransform = gameObject.GetComponent<RectTransform>();
+            _isRotationAble = isRotationAble;
         }
-
-
+        
         public void OnBeginDrag(PointerEventData eventData)
         {
             if (Painter.PainterState != PainterState.Rotation)
@@ -27,11 +24,11 @@ namespace DefaultNamespace
                 return;
             }
 
-            _previousMousePos = Camera.main.WorldToScreenPoint(transform.position);
+            _previousMousePos = Camera.main.WorldToScreenPoint(_rectTransform.position);
             Vector2 vec2 = eventData.position - _previousMousePos;
-            _angleOffset = (Mathf.Atan2(transform.right.y, transform.right.x) - Mathf.Atan2(vec2.y, vec2.x)) * Mathf.Rad2Deg;
+            _angleOffset = (Mathf.Atan2(_rectTransform.right.y, _rectTransform.right.x) - Mathf.Atan2(vec2.y, vec2.x)) * Mathf.Rad2Deg;
             
-            Painter.DoAction(new RotateAction(gameObject, transform.eulerAngles.z));
+            Painter.DoAction(new RotateAction(gameObject, _rectTransform.eulerAngles.z));
         }
 
         private Vector2 _previousMousePos;

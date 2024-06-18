@@ -5,18 +5,14 @@ using UnityEngine.EventSystems;
 
 public class SizeAdjustAble : MonoBehaviour, IPointerDownHandler
 {
-    [SerializeField] private bool _isSizeAdjustAble;
-    [SerializeField] private GameObject _sizePanel;
-    [SerializeField] private TMP_InputField _widthInputField;
-    [SerializeField] private TMP_InputField _heightInputField;
-
-    private RectTransform _rectTransform;
+    [SerializeField] private RectTransform _rectTransform;
+    bool _isSizeAdjustAble;
     
-    private void Start()
+    public void Init(bool isSizeAdjustAble)
     {
-        _rectTransform = gameObject.GetComponent<RectTransform>();
+        _isSizeAdjustAble = isSizeAdjustAble;
     }
-
+    
     public void OnPointerDown(PointerEventData eventData)
     {
         if (Painter.PainterState != PainterState.Move)
@@ -27,21 +23,21 @@ public class SizeAdjustAble : MonoBehaviour, IPointerDownHandler
         if (!_isSizeAdjustAble)
         {
             Painter.SelectGameObject = null;
-            _sizePanel.SetActive(false);
+            Paint.Instance.SizePanel.SetActive(false);
             return;
         }
 
         Painter.SelectGameObject = gameObject;
         
-        _sizePanel.SetActive(true);
-        _widthInputField.onValueChanged.RemoveAllListeners();
-        _widthInputField.onValueChanged.AddListener(WidthSizeChange);
+        Paint.Instance.SizePanel.SetActive(true);
+        Paint.Instance.WidthInputField.onValueChanged.RemoveAllListeners();
+        Paint.Instance.WidthInputField.onValueChanged.AddListener(WidthSizeChange);
         
-        _heightInputField.onValueChanged.RemoveAllListeners();
-        _heightInputField.onValueChanged.AddListener(HeightSizeChange);
+        Paint.Instance.HeightInputField.onValueChanged.RemoveAllListeners();
+        Paint.Instance.HeightInputField.onValueChanged.AddListener(HeightSizeChange);
         
-        _widthInputField.text = $"{_rectTransform.sizeDelta.x}";
-        _heightInputField.text = $"{_rectTransform.sizeDelta.y}";
+        Paint.Instance.WidthInputField.text = $"{_rectTransform.sizeDelta.x}";
+        Paint.Instance.HeightInputField.text = $"{_rectTransform.sizeDelta.y}";
     }
 
     private void WidthSizeChange(string value)

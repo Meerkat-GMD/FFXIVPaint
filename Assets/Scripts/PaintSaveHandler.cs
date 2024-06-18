@@ -33,7 +33,7 @@ namespace DefaultNamespace
                 Save();
             }
             
-            if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.J))
+            if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.L))
             {
                 Load();
             }
