@@ -68,7 +68,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: d5358c8c4960334498683df6df2e4968, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -90,6 +90,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c501c31f386d4e2ea419958cab5b8adf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _resizeAbleCursor: {fileID: 2800000, guid: 1e061701bdb43b944b7655dbd2f86569, type: 3}
   rectTransform: {fileID: 3852880615168778071}
 --- !u!114 &185134202701568729
 MonoBehaviour:
